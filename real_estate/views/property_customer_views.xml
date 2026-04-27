@@ -1,0 +1,225 @@
+<odoo>
+    <data>
+
+        <!-- Tree View  -->
+        <record model="ir.ui.view" id="property_customer_view_tree">
+            <field name="name">property.customer.view.tree</field>
+            <field name="model">property.customer</field>
+            <field name="arch" type="xml">
+                <list string="Customers">
+                    <field name="image" widget="image" options="{'size': 32}"/>
+                    <field name="name" string="Full Name"/>
+                    <field name="gender"/>
+                    <field name="email" widget="email"/>
+                    <field name="phone" widget="phone"/>
+                    <field name="address"/>
+                    <field name="age"/>
+                    <field name="joining" string="Joining Date"/>
+                    <field name="notes"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- FORM VIEW -->
+        <record model="ir.ui.view" id="property_customer_view_form">
+            <field name="name">property.customer.view.form</field>
+            <field name="model">property.customer</field>
+            <field name="arch" type="xml">
+                <form string="Customer">
+                    <header>
+                        <button name="action_reset_price" type="object" string="Reset Price" class="oe_highlight"/>
+
+                        <!-- Stat Card -->
+                        <div class="oe_button_box" name="button_box" position="inside">
+                            <button class="oe_stat_button" type="object" name="action_view_properties" icon="fa-home">
+                                <field name="property_count" widget="statinfo" string="Properties"/>
+                            </button>
+                        </div>
+                    </header>
+
+                    <sheet>
+                        <div class="o_form_sheet_bg">
+
+                            <!-- Top Section -->
+                            <group>
+                                <group>
+                                    <h3>General Information</h3>
+                                    <hr style="margin-top:0;"/>
+
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="gender"/>
+                                        <field name="age"/>
+                                        <field name="joining" string="Joining Date"/>
+                                    </group>
+
+                                    <h3>Contact Information</h3>
+                                    <hr style="margin-top:0;"/>
+
+                                    <group>
+                                        <field name="email" widget="email"/>
+                                        <field name="phone" widget="phone"/>
+                                        <field name="address"/>
+                                    </group>
+                                </group>
+
+                                <!-- Image Panel -->
+                                <group>
+                                    <div style="text-align:center; margin-top:10px;">
+                                        <field name="image" widget="image" class="oe_avatar" options="{'size': 128}"/>
+                                        <label for="image" string="Customer Image"
+                                               style="font-weight: 600; display:block; margin-top:5px;"/>
+                                    </div>
+                                </group>
+                            </group>
+
+                            <!-- Notebook -->
+                            <notebook>
+                                <page string="Properties">
+                                    <field name="property_ids" widget="many2many_tags"/>
+                                </page>
+
+                                <page string="Additional Info">
+                                    <h3>Additional Details</h3>
+                                    <hr style="margin-top:0;"/>
+                                    <field name="notes" placeholder="Enter additional notes..."/>
+                                </page>
+                            </notebook>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- SEARCH VIEW -->
+        <record model="ir.ui.view" id="property_customer_view_search">
+            <field name="name">property.customer.view.search</field>
+            <field name="model">property.customer</field>
+            <field name="arch" type="xml">
+                <search string="Search Customers">
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <separator/>
+                    <filter name="male" string="Male" domain="[('gender','=','male')]"/>
+                    <filter name="female" string="Female" domain="[('gender','=','female')]"/>
+                    <group expand="1" string="Group By">
+                        <filter name="group_by_gender" string="Gender" context="{'group_by':'gender'}"/>
+                        <filter name="group_by_joining" string="Joining Date" context="{'group_by':'joining'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- ACTION -->
+        <record model="ir.actions.act_window" id="property_customer_main_action">
+            <field name="name">Customer</field>
+            <field name="res_model">property.customer</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- MENU -->
+        <menuitem name="Customer" id="real_estate_customer_menu"
+                  parent="real_estate.real_estate_root_menu"
+                  action="real_estate.property_customer_main_action"
+                  sequence="10"/>
+    </data>
+</odoo>
+
+
+        <!--<odoo>-->
+        <!--    <data>-->
+        <!--        &lt;!&ndash; explicit list view definition &ndash;&gt;-->
+        <!--        <record model="ir.ui.view" id="property_customer_view_tree">-->
+        <!--            <field name="name">property.customer.view.tree</field>-->
+        <!--            <field name="model">property.customer</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <list string="Customers">-->
+        <!--                    <field name="name" string="Full Name"/>-->
+        <!--                    <field name="gender"/>-->
+        <!--                    <field name="email" widget="email"/>-->
+        <!--                    <field name="phone" widget="phone"/>-->
+        <!--                    <field name="address"/>-->
+        <!--                    <field name="image" widget="image" options="{'size': 40}"/>-->
+        <!--                    <field name="age"/>-->
+        <!--                    <field name="joining" string="Joining Date"/>-->
+        <!--                    <field name="notes"/>-->
+        <!--                </list>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <!--        <record model="ir.ui.view" id="property_customer_view_form">-->
+        <!--            <field name="name">property.customer.view.form</field>-->
+        <!--            <field name="model">property.customer</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <form string="Customer">-->
+        <!--                    <header>-->
+        <!--                        <button name="action_reset_price" type="object" string="Reset Price" class="oe_highlight" />-->
+        <!--                    </header>-->
+        <!--                    <sheet>-->
+        <!--                        <div class="oe_button_box" name="button_box">-->
+        <!--                            <button class="oe_stat_button" type="object" name="action_view_properties" icon="fa-user">-->
+        <!--                                <field string="Properties" name="property_count" widget="statinfo"/>-->
+        <!--                            </button>-->
+        <!--                        </div>-->
+        <!--                        <group>-->
+        <!--                            <group>-->
+        <!--                                <field name="name"/>-->
+        <!--                                <field name="gender"/>-->
+        <!--                                <field name="email" widget="email"/>-->
+        <!--                                <field name="phone" widget="phone"/>-->
+        <!--                                <field name="address"/>-->
+        <!--                                <field name="age"/>-->
+        <!--                                <field name="joining" string="Joining Date"/>-->
+        <!--                                <field name="notes"/>-->
+        <!--                            </group>-->
+        <!--                            <group>-->
+        <!--                                <field name="image" widget="image" class="oe_avatar" options="{'size': 128}"/>-->
+        <!--                            </group>-->
+        <!--                        </group>-->
+        <!--                        <notebook>-->
+        <!--                            <page string="Properties">-->
+        <!--                                <field name="property_ids" widget="many2many_tags"/>-->
+        <!--                            </page>-->
+        <!--                            <page string="Additional Info">-->
+        <!--                            </page>-->
+        <!--                        </notebook>-->
+        <!--                    </sheet>-->
+        <!--                </form>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <!--        &lt;!&ndash; search &ndash;&gt;-->
+        <!--        <record model="ir.ui.view" id="property_customer_view_search">-->
+        <!--            <field name="name">property.customer.view.search</field>-->
+        <!--            <field name="model">property.customer</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <search string="Search Customers">-->
+        <!--                    <field name="name"/>-->
+        <!--                    <field name="email"/>-->
+        <!--                    <field name="phone"/>-->
+        <!--                    <separator/>-->
+        <!--                    <filter name="male" string="Male" domain="[('gender','=','male')]"/>-->
+        <!--                    <filter name="female" string="Female" domain="[('gender','=','female')]"/>-->
+        <!--                    <group expand="1" string="Group By">-->
+        <!--                        <filter name="group_by_gender" string="Gender" context="{'group_by':'gender'}"/>-->
+        <!--                        <filter name="group_by_joining" string="Joining Date" context="{'group_by':'joining'}"/>-->
+        <!--                    </group>-->
+        <!--                </search>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <!--        &lt;!&ndash; actions opening views on models &ndash;&gt;-->
+        <!--        <record model="ir.actions.act_window" id="property_customer_main_action">-->
+        <!--            <field name="name">Customer</field>-->
+        <!--            <field name="res_model">property.customer</field>-->
+        <!--            <field name="view_mode">list,form</field>-->
+        <!--        </record>-->
+
+        <!--        &lt;!&ndash; menu categories &ndash;&gt;-->
+        <!--        <menuitem name="Customer" id="real_estate_customer_menu"-->
+        <!--                  parent="real_estate.real_estate_root_menu"-->
+        <!--                  action="real_estate.property_customer_main_action"-->
+        <!--                  sequence="10" />-->
+        <!--    </data>-->
+        <!--</odoo>-->

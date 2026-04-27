@@ -1,0 +1,89 @@
+<odoo>
+    <template id="report_property_customer">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+
+                <style>
+                    table.property-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 18px;
+                    font-size: 14px;
+                    }
+                    .property-table th, .property-table td {
+                    border: 1px solid #ccc;
+                    padding: 8px;
+                    vertical-align: top;
+                    }
+                    .img-box {
+                    width: 120px;
+                    height: 120px;
+                    object-fit: cover;
+                    border: 1px solid #aaa;
+                    border-radius: 6px;
+                    }
+                    .no-img {
+                    width: 120px;
+                    height: 120px;
+                    border: 1px dashed #aaa;
+                    border-radius: 6px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 11px;
+                    color: #777;
+                    }
+                </style>
+
+                <div class="page">
+                    <h2 style="text-align:center;">Customer Property Report</h2>
+
+                    <table class="property-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 130px;">Image</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="docs.property_ids" t-as="property">
+                                <!-- Image -->
+                                <td>
+                                    <img t-if="property.image"
+                                         t-att-src="image_data_uri(property.image)"
+                                         class="img-box"/>
+
+                                    <div t-if="not property.image" class="no-img">
+                                        No Image
+                                    </div>
+                                </td>
+
+                                <!-- Details -->
+                                <td>
+                                    <p>
+                                        <strong>Name:</strong>
+                                        <t t-out="property.name"/>
+                                    </p>
+                                    <p>
+                                        <strong>Type:</strong>
+                                        <t t-out="property.type"/>
+                                    </p>
+                                    <p>
+                                        <strong>Address:</strong>
+                                        <t t-out="property.address"/>
+                                    </p>
+                                    <p>
+                                        <strong>Price:</strong>
+                                        <t t-out="property.price"/>
+                                        RS
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

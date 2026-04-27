@@ -1,0 +1,10 @@
+<odoo>
+    <record id="action_mark_property_sold" model="ir.actions.server">
+        <field name="name">Mark Property as Sold</field>
+        <field name="model_id" ref="real_estate.model_property_property"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.write({'state': 'sold'})
+        </field>
+    </record>
+</odoo>

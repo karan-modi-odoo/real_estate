@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="reset_price_wizard_form_view">
+            <field name="name">reset.price.wizard.form.view</field>
+            <field name="model">reset.price.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="customers" readonly="1" widget="many2many_tags" options="{'no_create': True}"/>
+                        </group>
+                        <h3>
+                            Are you sure you want to reset price for all properties of above customers?
+                        </h3>
+                    </sheet>
+                    <footer>
+                        <button name="action_reset_price" string="Reset" type="object"/>
+                        <button name="cancel" string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+        </record>
+    </data>
+</odoo>

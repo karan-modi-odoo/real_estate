@@ -1,0 +1,15 @@
+<odoo>
+    <record id="ir_cron_archive_old_properties" model="ir.cron">
+        <field name="name">Archive Old Properties</field>
+        <field name="model_id" ref="real_estate.property.property"/>
+        <field name="state">code</field>
+        <field name="code">
+            model.search([('create_date', '&lt;', (DateTime.now() - relativedelta(years=2)).strftime('%Y-%m-%d'))]).write({'active': False})
+        </field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+    </record>
+</odoo>
+

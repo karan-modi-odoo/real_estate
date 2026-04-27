@@ -1,0 +1,26 @@
+<odoo>
+    <!--    Report Function in Expense -->
+    <record id="action_report_property_customer" model="ir.actions.report">
+        <field name="name">Property Summary</field>
+        <field name="model">property.customer</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">real_estate.report_property_customer</field>
+        <field name="report_file">real_estate.report_property_customer</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+        <field name="binding_model_id" ref="real_estate.model_property_customer"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
+
+
+        <!--    <report-->
+        <!--            id="action_report_property_customer"-->
+        <!--            model="property.customer"-->
+        <!--            string="Property Customer Report"-->
+        <!--            report_type="qweb-pdf"-->
+        <!--            name="real_estate.report_property_customer_report"-->
+        <!--            file="real_estate.report_property_customer_report"-->
+        <!--            print_report_name="'Customer - %s' % (object.name)"-->
+        <!--            binding_model_id="model_ir_module_module"-->
+        <!--            binding_type="report"-->
+        <!--    />-->

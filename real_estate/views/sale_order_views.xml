@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_order_form">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <header>
+                    <button name="action_add_product" string="Add Product"
+                            type="object" class="oe_highlight" invisible="product_variants == False or state != 'draft','sent'"/>
+                    <button name="action_manager_approve" string="Manager Approve"
+                            type="object" class="oe_highlight"
+                            invisible="requires_approval == False or is_manager_approved == True"/>
+                </header>
+                <field name="partner_id" position="attributes">
+                    <attribute name="context">{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True, 'from_so': True}</attribute>
+                </field>
+                <xpath expr="//field[@name='validity_date']" position="after">
+                    <field name="big_order"/>
+                    <field name="original_validity_date"/>
+                    <field name="quotation_alert"/>
+                </xpath>
+                <xpath expr="//field[@name='sale_order_template_id']" position="after">
+                    <field name="product_variants" invisible="state != 'draft','sent'"/>
+                    <field name="commission_amount"/>
+                    <field name="requires_approval"/>
+                     <field name="is_manager_approved" invisible="requires_approval == False"
+                          readonly="state != 'draft','sent'"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/list//field[@name='price_subtotal']" position="after">
+                    <field name="commission_rate"/>
+                    <field name="line_commission_amount"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
